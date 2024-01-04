@@ -1,3 +1,6 @@
+let playerScore 
+let computerScore 
+
 function getComputerChoice(){
     // Generates a random number between 0 and 2
     // 0 = Rock
@@ -13,6 +16,7 @@ else if(num == 1){
 return "scissor"
 }
 
+//Funtion where it plays a round of rock paper scissor
 function playRound(playerSelection, computerSelection) {
     /* 
     Get selection from player
@@ -20,14 +24,16 @@ function playRound(playerSelection, computerSelection) {
     Compare selections
     return the winner with a string
      */
+    playerScore = 0
+    computerScore = 0
     let player = playerSelection.toLowerCase()
     let computer = computerSelection
-    console.log(computer)
     if( 
         (player == "rock" && computer == "scissor")||
         (player == "paper" && computer == "rock")||
         (player == "sicssor" && computer == "paper") )
         {
+            playerScore++;
        return 'Player Wins: ' + player + ' beats ' + computer + '.'
     }
     if( 
@@ -35,9 +41,36 @@ function playRound(playerSelection, computerSelection) {
         (computer == "paper" && player == "rock")||
         (computer == "sicssor" && player == "paper") )
         {
+            computerScore++;
        return 'Computer Wins: ' + computer + ' beats ' + player + '.'
     }
     return "Tie!"
 }
-console.log(playRound("Rock", getComputerChoice()))
-  
+//Game function where it plays PlayRound five times and see who won
+function game(){
+    //for loop 
+    // used to play the game five times
+    for(let i = 0; i < 5; i++){
+        let playerSelc = prompt("Please Choose between rock, paper or scissor")
+        console.log(playRound(playerSelc, getComputerChoice()))
+    }
+    //If player has won more, print "You won!"
+    if(playerScore > computerScore){
+        return "You Won!"
+        //If Computer has won more, print "Computer Won"
+    }
+    if(playerScore < computerScore){
+        return "Computer Won!"
+    }
+    //Otherwise it's a tie
+    else{
+        return "Tie!"
+    }
+}
+//using a consol log to initiate the function game.
+//Consol log is there so the player sees who won in the end
+console.log(game())
+//asks
+if (prompt("Do you want to play again?") == "yes"){
+    console.log(game())
+}
